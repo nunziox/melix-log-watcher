@@ -11,16 +11,20 @@ def histdata():
 	keys = r.keys()
 	x = []
 	for elem in r.keys():
-		x.append(r.get(elem))
+		elem = r.get(elem)
+		if elem is not None:
+			x.append(int(elem))
+	x.sort(reverse=True)
 	return x
 
 def update_data(args):
     ax.clear()
     x=histdata()
-    ax.hist(x, normed=True)
+    print(x)
+    ax.bar([i for i in range(len(x))],x)
 
 
 fig=plt.figure()
 ax = fig.add_subplot(111)
-bar=animation.FuncAnimation(fig,update_data,repeat=False,interval=100)
+bar=animation.FuncAnimation(fig,update_data,repeat=False,interval=50)
 plt.show()
